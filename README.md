@@ -2,7 +2,7 @@
 
 ## Read-me original
 
-[README original](./o-readme.md)
+[README original](./senior/o-readme.md)
 
 ## Setup:
 
