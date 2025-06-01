@@ -9,19 +9,21 @@ chmod +x _docker-compose/docker-up.bash
 
 # TODO: Check if requirements are installed: docker-compose, docker, node, python, etc.
 
-if ! command -v docker-compose &> /dev/null; then
-    echo "docker-compose could not be found. Please install it first."
-    exit 1
-fi
+# if ! command -v docker-compose &> /dev/null && ! command -v docker compose &> /dev/null; then
+#     echo "docker-compose or docker compose could not be found. Please install Docker Compose."
+#     exit 1
+# fi
 
-if ! command -v docker &> /dev/null; then
-    echo "Docker could not be found. Please install it first."
-    exit 1
-fi
+# if ! command -v docker &> /dev/null; then
+#     echo "Docker could not be found. Please install it first."
+#     exit 1
+# fi
 
 # Execute the build scripts
 echo "Building frontend image..."
-./frontend/build.bash
+cd frontend
+./build.bash
+cd ..
 
 if [ $? -ne 0 ]; then
     echo "Frontend build failed. Exiting."
@@ -29,7 +31,9 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Building backend image..."
-./backend/build.bash
+cd backend
+./build.bash
+cd ..
 
 if [ $? -ne 0 ]; then
     echo "Backend build failed. Exiting."
@@ -38,4 +42,6 @@ fi
 
 # Start the Docker containers
 echo "Starting Docker containers..."
-_docker-compose/docker-up.bash
+cd _docker-compose
+./docker-up.bash
+cd ..
