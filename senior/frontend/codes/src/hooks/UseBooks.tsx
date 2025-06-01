@@ -47,8 +47,8 @@ export function useBooks(filters: UseBooksFilters = {}): UseBooksResult {
     params.append("page", String(page));
     params.append("page_size", String(pageSize));
 
-    // @TODO: Change to use value from environment variable
-    fetch(`http://127.0.0.1:5000/api/v1/books?${params.toString()}`)
+    const backendApi = process.env.NEXT_PUBLIC_BACKEND_API || "";
+    fetch(`http://${backendApi}/books?${params.toString()}`)
       .then((res) => res.json())
       .then((json) => {
         setBooks(json.data || []);

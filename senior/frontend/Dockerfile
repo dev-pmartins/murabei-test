@@ -10,4 +10,6 @@ COPY codes/ .
 
 EXPOSE 3000
 
+ENV NEXT_PUBLIC_BACKEND_API=murabei-backend/api/v1
+
 CMD ["npm", "run", "dev"]

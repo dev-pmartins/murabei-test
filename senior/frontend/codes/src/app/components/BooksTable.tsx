@@ -22,6 +22,7 @@ import {
 } from "@tanstack/react-table";
 import { Book } from "@/types/Book";
 import AuthorBooks from './AuthorBooks';
+import BooksFilter from "./BooksFilter";
 
 export const columns: ColumnDef<Book>[] = [
   {
@@ -128,37 +129,7 @@ const BooksTable = ({
 
   return (
     <>
-      <div>
-        <div className="flex items-center py-4">
-          <Input
-            placeholder="Filter authors..."
-            value={filters.author}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFilters.setAuthor(event.target.value)}
-            className="max-w-sm"
-          />
-
-          <Input
-            placeholder="Filter titles..."
-            value={filters.title}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFilters.setTitle(event.target.value)}
-            className="max-w-sm ml-4"
-          />
-
-          <Input
-            placeholder="Filter subjects..."
-            value={filters.subjects}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFilters.setSubjects(event.target.value)}
-            className="max-w-sm ml-4"
-          />
-
-          <Input
-            placeholder="Filter publisher..."
-            value={filters.publisher}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFilters.setPublisher(event.target.value)}
-            className="max-w-sm ml-4"
-          />
-        </div>
-      </div>
+      <BooksFilter filters={filters} setFilters={setFilters} />
       <div className="rounded-md border">
         <Table>
           <TableHeader>

@@ -13,12 +13,11 @@ export function useAuthorBooks(author_slug?: string, name?: string) {
     setError(null);
 
     const params = name ? `?name=${encodeURIComponent(name)}` : "";
-    // @TODO: Change to use value from environment variable
-    fetch(`http://127.0.0.1:5000/api/v1/books/author/${author_slug}${params}`)
+    const backendApi = process.env.NEXT_PUBLIC_BACKEND_API || "";
+    fetch(`http://${backendApi}/books/author/${author_slug}${params}`)
       .then((res) => {
-        console.log("Response status:", res.status);
-        if (!res.ok) throw new Error("Erro ao buscar livros do autor");
-        return res.json();
+      if (!res.ok) throw new Error("Erro ao buscar livros do autor");
+      return res.json();
       })
       .then((data) => setBooks(data))
       .catch((err) => setError(err.message))
