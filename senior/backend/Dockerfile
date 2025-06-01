@@ -20,7 +20,5 @@ COPY . .
 # Expose the port on which the Flask app will run (adjust if necessary)
 EXPOSE 5000
 
-# ...
-
 # Run the Flask development server
-CMD ["flask", "--app", "app", "run", "--host=0.0.0.0"]
+CMD ["flask", "--app", "app", "run", "--host=0.0.0.0", "--debug"]

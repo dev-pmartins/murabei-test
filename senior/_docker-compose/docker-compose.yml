@@ -1,10 +1,26 @@
-version: "3.8"
 services:
   backend:
-    image: backend:latest # nomeie a imagem da forma que desejar
+    container_name: murabei-backend
+    image: backend:latest
     ports:
       - "5000:5000"
-  # frontend:
-  #   image: frontend:latest # nomeie a imagem da forma que desejar
-  #   ports:
-  #     - "3000:3000"
+    volumes:
+      - ../backend:/app
+    networks:
+      - murabei-net
+  frontend:
+    container_name: murabei-frontend
+    image: frontend:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../frontend/codes:/app
+      - /app/node_modules
+    environment:
+      - BACKEND_API=murabei-backend/api/v1
+    networks:
+      - murabei-net
+
+networks:
+  murabei-net:
+    driver: bridge
